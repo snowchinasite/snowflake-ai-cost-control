@@ -99,7 +99,7 @@
                                │ 消耗自动记录
                                ▼
 ┌─────────────────────────────────────────────────────────────────────────┐
-│               ACCOUNT_USAGE.AI_FUNCTIONS_USAGE_HISTORY                    │
+│               ACCOUNT_USAGE.CORTEX_AISQL_USAGE_HISTORY                    │
 │                     （Snowflake 原生 Usage 视图）                           │
 └──────────────────────────────┬────────────────────────────────────────────┘
                                │
@@ -254,7 +254,7 @@ WHERE b.department = 'engineering';
 ### 4.5 熔断 Task
 
 - 频率：每 15 分钟
-- 逻辑：查询 `AI_FUNCTIONS_USAGE_HISTORY`，对比用户日已用 vs 日限额
+- 逻辑：查询 `CORTEX_AISQL_USAGE_HISTORY`，对比用户日已用 vs 日限额
 - 动作：超限 → Revoke 用户对 Wrapper UDF 的 USAGE 权限
 
 ### 4.6 恢复 Task

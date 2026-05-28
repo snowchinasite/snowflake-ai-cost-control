@@ -18,7 +18,7 @@ DECLARE
     SELECT u.user_name
     FROM (
       SELECT user_name, SUM(token_count) AS daily_tokens
-      FROM SNOWFLAKE.ACCOUNT_USAGE.AI_FUNCTIONS_USAGE_HISTORY
+      FROM SNOWFLAKE.ACCOUNT_USAGE.CORTEX_AISQL_USAGE_HISTORY
       WHERE start_time >= CURRENT_DATE()
       GROUP BY user_name
     ) usage
