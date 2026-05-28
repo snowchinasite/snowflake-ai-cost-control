@@ -1,0 +1,2 @@
+-- This file has been superseded by 04_tasks.sql and 04_grant_access.sql
+-- Please use those files instead.

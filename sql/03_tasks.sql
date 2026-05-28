@@ -1,0 +1,2 @@
+-- This file has been superseded by 04_tasks.sql
+-- Please use that file instead.
