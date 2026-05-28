@@ -76,12 +76,13 @@ $$
 $$;
 
 -- safe_ai_extract: Wrapper for AI_EXTRACT
+-- Note: AI_EXTRACT requires the second argument to be an OBJECT (key-value pairs)
 CREATE OR REPLACE FUNCTION safe_ai_extract(
     input_text VARCHAR,
-    instructions VARCHAR,
+    instructions OBJECT,
     exemption_token VARCHAR DEFAULT NULL
 )
-RETURNS VARIANT
+RETURNS OBJECT
 LANGUAGE SQL
 AS
 $$
@@ -103,7 +104,7 @@ $$
     THEN
       AI_EXTRACT(input_text, instructions)
     ELSE
-      TO_VARIANT('ERROR: Token estimate exceeds single-query limit.')
+      OBJECT_CONSTRUCT('error', 'Token estimate exceeds single-query limit.')
   END
 $$;
 
@@ -143,7 +144,7 @@ $$;
 CREATE OR REPLACE FUNCTION safe_ai_sentiment(
     input_text VARCHAR
 )
-RETURNS FLOAT
+RETURNS OBJECT
 LANGUAGE SQL
 AS
 $$
