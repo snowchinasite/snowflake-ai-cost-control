@@ -23,11 +23,12 @@ with tab1:
 
     usage = session.sql(f"""
         SELECT 
-            COALESCE(SUM(token_count), 0) as daily_tokens,
+            COALESCE(SUM(h.tokens), 0) as daily_tokens,
             COUNT(*) as query_count
-        FROM SNOWFLAKE.ACCOUNT_USAGE.AI_FUNCTIONS_USAGE_HISTORY
-        WHERE user_name = '{current_user}'
-          AND start_time >= CURRENT_DATE()
+        FROM SNOWFLAKE.ACCOUNT_USAGE.CORTEX_AISQL_USAGE_HISTORY h
+        JOIN SNOWFLAKE.ACCOUNT_USAGE.USERS u ON h.user_id = u.user_id
+        WHERE u.name = '{current_user}'
+          AND h.usage_time >= CURRENT_DATE()
     """).collect()
 
     budget = session.sql(f"""
